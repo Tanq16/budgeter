@@ -1,5 +1,6 @@
 import os
 import json
+import datetime
 from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
@@ -20,7 +21,6 @@ def save_expenses(month, year, expenses):
         json.dump(expenses, f, indent=4)
 
 def get_current_month_year():
-    import datetime
     now = datetime.datetime.now()
     return now.month, now.year
 
@@ -31,7 +31,9 @@ def index():
         category = request.form["category"].lower()
         amount = float(request.form["amount"])
         note = request.form["note"]
-        _, month, year = map(int, date.split("-"))
+        input_date = datetime.datetime.strptime(date, "%Y-%m-%dT%H:%M:%S+00:00")
+        newdate = input_date.strftime("%d-%m-%Y")
+        _, month, year = map(int, newdate.split("-"))
         expenses = load_expenses(month, year)
         expenses.append({"date": date, "category": category, "amount": amount, "note": note})
         save_expenses(month, year, expenses)
