@@ -31,8 +31,10 @@ def index():
         category = request.form["category"].lower()
         amount = float(request.form["amount"])
         note = request.form["note"]
-        input_date = datetime.datetime.strptime(date, "%Y-%m-%dT%H:%M:%S+00:00")
-        newdate = input_date.strftime("%d-%m-%Y")
+        # input_date = datetime.datetime.strptime(date, "%d-%m-%Y")
+        # newdate = input_date.strftime("%d-%m-%Y")
+        if date == "now":
+            date = datetime.datetime.now()
         _, month, year = map(int, newdate.split("-"))
         expenses = load_expenses(month, year)
         expenses.append({"date": date, "category": category, "amount": amount, "note": note})
