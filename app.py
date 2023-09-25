@@ -34,8 +34,8 @@ def index():
         # input_date = datetime.datetime.strptime(date, "%d-%m-%Y")
         # newdate = input_date.strftime("%d-%m-%Y")
         if date == "now":
-            date = datetime.datetime.now()
-        _, month, year = map(int, newdate.split("-"))
+            date = datetime.datetime.now().strftime("%d-%m-%Y")
+        _, month, year = map(int, date.split("-"))
         expenses = load_expenses(month, year)
         expenses.append({"date": date, "category": category, "amount": amount, "note": note})
         save_expenses(month, year, expenses)
