@@ -1,41 +1,104 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
+<!--
+	Landed by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 <html>
-<head>
-    <title>Expense Tracker</title>
-</head>
-<body>
-    <h1>Expense Tracker</h1>
-    <form action="{{ url_for('index') }}" method="POST">
-        <label for="date">Date (dd-mm-yyyy):</label>
-        <input type="text" name="date" required><br>
-        <label for="category">Category:</label>
-        <input type="text" name="category" required><br>
-        <label for="amount">Amount:</label>
-        <input type="number" name="amount" step="0.01" required><br>
-        <label for="note">Note:</label>
-        <input type="text" name="note"><br>
-        <input type="submit" value="Add Expense">
-    </form>
-    <br>
-    <h2>Expenses for {{ month }}-{{ year }}</h2>
-    <table>
-        <tr>
-            <th>Date</th>
-            <th>Category</th>
-            <th>Amount</th>
-            <th>Note</th>
-        </tr>
-        {% for expense in expenses %}
-        <tr>
-            <td>{{ expense.date }}</td>
-            <td>{{ expense.category }}</td>
-            <td>{{ expense.amount }}</td>
-            <td>{{ expense.note }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-    <br>
-    <a href="{{ url_for('show_expenses', month=month-1, year=year) }}">Previous Month</a>
-    <a href="{{ url_for('show_expenses', month=month+1, year=year) }}">Next Month</a>
-</body>
+	<head>
+		<title>Budgeter</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{{ url_for('static', filename='/css/main.css') }}" />
+		<noscript><link rel="stylesheet" href="{{ url_for('static', filename='/css/noscript.css') }}" /></noscript>
+	</head>
+	<body class="is-preload">
+		<div id="page-wrapper">
+
+			<!-- Main -->
+				<div id="main" class="wrapper style1">
+					<div class="container">
+						<header class="major">
+							<h2>Budgeter</h2>
+						</header>
+
+						<!-- Table -->
+							<section>
+								<form method="post" action="{{ url_for('index') }}">
+									<div class="row gtr-uniform gtr-50">
+										<div class="col-6 col-12-xsmall">
+											<input type="text" name="date" id="date" value="" placeholder="Date (dd-mm-yyyy)" />
+										</div>
+										<div class="col-6 col-12-xsmall">
+											<input type="text" name="amount" id="amount" value="" placeholder="Amount" />
+										</div>
+										<div class="col-6 col-12-xsmall">
+											<select name="category" id="category">
+												<option value="food">food</option>
+												<option value="family">family</option>
+												<option value="groceries">groceries</option>
+												<option value="home">home</option>
+												<option value="investing">investing</option>
+												<option value="personal">personal</option>
+												<option value="shopping">shopping</option>
+												<option value="subscriptions">subscriptions</option>
+												<option value="travel">travel</option>
+											</select>
+										</div>
+										<div class="col-6 col-12-xsmall">
+											<input type="text" name="note" id="note" value="" placeholder="Note" />
+										</div>
+										<div class="col-12">
+											<ul class="actions">
+												<li><input type="submit" value="Add Expense" class="primary" /></li>
+												<li><input type="reset" value="Reset" /></li>
+											</ul>
+										</div>
+									</div>
+								</form>
+							</section>
+
+							<section>
+								<h3>Expenses for {{ month }}-{{ year }}</h3>
+								<div class="table-wrapper">
+									<table class="alt">
+										<thead>
+											<tr>
+												<th>Date</th>
+												<th>Category</th>
+												<th>Amount</th>
+												<th>Note</th>
+											</tr>
+										</thead>
+										<tbody>
+											{% for expense in expenses %}
+										<tr>
+											<td>{{ expense.date }}</td>
+											<td>{{ expense.category }}</td>
+											<td>{{ expense.amount }}</td>
+											<td>{{ expense.note }}</td>
+										</tr>
+										{% endfor %}
+										</tbody>
+									</table>
+								</div>
+								<ul class="actions">
+									<li><a href="{{ url_for('show_expenses', month=month-1, year=year) }}" class="button">Previous Month</a></li>
+									<li><a href="{{ url_for('show_expenses', month=month+1, year=year) }}" class="button">Next Month</a></li>
+								</ul>
+							</section>
+					</div>
+				</div>
+		</div>
+
+		<!-- Scripts -->
+			<script src="{{ url_for('static', filename='/js/jquery.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='/js/jquery.scrolly.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='/js/jquery.dropotron.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='/js/jquery.scrollex.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='/js/browser.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='/js/breakpoints.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='/js/util.js') }}"></script>
+			<script src="{{ url_for('static', filename='/js/main.js') }}"></script>
+	</body>
 </html>
