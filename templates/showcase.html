@@ -9,8 +9,8 @@
 		<title>Budgeter</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="{{ url_for('static', filename='/css/main.css') }}" />
-		<noscript><link rel="stylesheet" href="{{ url_for('static', filename='/css/noscript.css') }}" /></noscript>
+		<link rel="stylesheet" href="{{ url_for('static', _scheme='https', _external=True, filename='/css/main.css') }}" />
+		<noscript><link rel="stylesheet" href="{{ url_for('static', _scheme='https', _external=True, filename='/css/noscript.css') }}" /></noscript>
 	</head>
 	<body class="is-preload">
 		<div id="page-wrapper">
@@ -24,7 +24,7 @@
 
 						<!-- Table -->
 							<section>
-								<form method="post" action="{{ url_for('index') }}">
+								<form method="post" action="{{ url_for('index', _scheme='https', _external=True) }}">
 									<div class="row gtr-uniform gtr-50">
 										<div class="col-6 col-12-xsmall">
 											<input type="text" name="date" id="date" value="" placeholder="Date (dd-mm-yyyy)" />
@@ -83,8 +83,8 @@
 									</table>
 								</div>
 								<ul class="actions">
-									<li><a href="{{ url_for('show_expenses', month=month-1, year=year) }}" class="button">Previous Month</a></li>
-									<li><a href="{{ url_for('show_expenses', month=month+1, year=year) }}" class="button">Next Month</a></li>
+									<li><a href="{{ url_for('show_expenses', _scheme='https', _external=True, month=month-1, year=year) }}" class="button">Previous Month</a></li>
+									<li><a href="{{ url_for('show_expenses', _scheme='https', _external=True, month=month+1, year=year) }}" class="button">Next Month</a></li>
 								</ul>
 							</section>
 					</div>
@@ -92,13 +92,13 @@
 		</div>
 
 		<!-- Scripts -->
-			<script src="{{ url_for('static', filename='/js/jquery.min.js') }}"></script>
-			<script src="{{ url_for('static', filename='/js/jquery.scrolly.min.js') }}"></script>
-			<script src="{{ url_for('static', filename='/js/jquery.dropotron.min.js') }}"></script>
-			<script src="{{ url_for('static', filename='/js/jquery.scrollex.min.js') }}"></script>
-			<script src="{{ url_for('static', filename='/js/browser.min.js') }}"></script>
-			<script src="{{ url_for('static', filename='/js/breakpoints.min.js') }}"></script>
-			<script src="{{ url_for('static', filename='/js/util.js') }}"></script>
-			<script src="{{ url_for('static', filename='/js/main.js') }}"></script>
+			<script src="{{ url_for('static', _scheme='https', _external=True, filename='/js/jquery.min.js') }}"></script>
+			<script src="{{ url_for('static', _scheme='https', _external=True, filename='/js/jquery.scrolly.min.js') }}"></script>
+			<script src="{{ url_for('static', _scheme='https', _external=True, filename='/js/jquery.dropotron.min.js') }}"></script>
+			<script src="{{ url_for('static', _scheme='https', _external=True, filename='/js/jquery.scrollex.min.js') }}"></script>
+			<script src="{{ url_for('static', _scheme='https', _external=True, filename='/js/browser.min.js') }}"></script>
+			<script src="{{ url_for('static', _scheme='https', _external=True, filename='/js/breakpoints.min.js') }}"></script>
+			<script src="{{ url_for('static', _scheme='https', _external=True, filename='/js/util.js') }}"></script>
+			<script src="{{ url_for('static', _scheme='https', _external=True, filename='/js/main.js') }}"></script>
 	</body>
 </html>
