@@ -24,6 +24,22 @@ def get_current_month_year():
     now = datetime.datetime.now()
     return now.month, now.year
 
+def get_month_analysis(month, year):
+    expenses = load_expenses(month, year)
+    cat_totals = {}
+    for i in expenses:
+        if i["category"] not in cat_totals:
+            cat_totals[i["category"]] = float(i["amount"])
+        else:
+            cat_totals[i["category"]] += float(i["amount"])
+    sorted_eight = sorted(expenses, key=lambda x:x["amount"], reverse=True)[:8]
+    return cat_totals, sorted_eight
+
+def get_trend_analysis(month, year):
+    # get category totals average for last 6 months
+    # print current and last 6 average together
+    pass
+
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
@@ -50,6 +66,13 @@ def show_expenses():
         month, year = get_current_month_year()
     expenses = load_expenses(month, year)
     return render_template("showcase.html", expenses=expenses, month=month, year=year)
+
+@app.route("/analysis")
+def analyze_expenses():
+    month = int(request.args.get("month", 0))
+    year = int(request.args.get("year", 0))
+    cat_totals, sorted_eight = get_month_analysis(month, year)
+    return render_template("analysis.html", cat_totals=cat_totals, sorted_eight=sorted_eight, month=month, year=year)
 
 if __name__ == "__main__":
     app.run(debug=True)

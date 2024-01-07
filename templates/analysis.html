@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<!--
+	Landed by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Budgeter</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{{ url_for('static', filename='/css/main.css') }}" />
+		<noscript><link rel="stylesheet" href="{{ url_for('static', filename='/css/noscript.css') }}" /></noscript>
+	</head>
+	<body class="is-preload">
+		<div id="page-wrapper">
+
+			<!-- Main -->
+				<div id="main" class="wrapper style1">
+					<div class="container">
+						<header class="major">
+							<h2>Budgeter - Anlysis</h2>
+						</header>
+
+						<!-- Table -->
+
+							<section>
+								<h3>Categorized Expenses for {{ month }}-{{ year }}</h3>
+								<div class="table-wrapper">
+									<table class="alt">
+										<thead>
+											<tr>
+												<th>Category</th>
+												<th>Amount</th>
+											</tr>
+										</thead>
+										<tbody>
+											{% for cat, amount in cat_totals.items() %}
+										<tr>
+											<td>{{ cat }}</td>
+											<td>{{ amount|round(2) }}</td>
+										</tr>
+										{% endfor %}
+										</tbody>
+									</table>
+								</div>
+								<br>
+								<h3>Ordered 8 Expenses for {{ month }}-{{ year }}</h3>
+								<div class="table-wrapper">
+									<table class="alt">
+										<thead>
+											<tr>
+												<th>Date</th>
+												<th>Category</th>
+												<th>Amount</th>
+												<th>Note</th>
+											</tr>
+										</thead>
+										<tbody>
+											{% for expense in sorted_eight %}
+										<tr>
+											<td>{{ expense.date }}</td>
+											<td>{{ expense.category }}</td>
+											<td>{{ expense.amount }}</td>
+											<td>{{ expense.note }}</td>
+										</tr>
+										{% endfor %}
+										</tbody>
+									</table>
+								</div>
+							</section>
+					</div>
+				</div>
+		</div>
+
+		<!-- Scripts -->
+			<script src="{{ url_for('static', filename='/js/jquery.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='/js/jquery.scrolly.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='/js/jquery.dropotron.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='/js/jquery.scrollex.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='/js/browser.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='/js/breakpoints.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='/js/util.js') }}"></script>
+			<script src="{{ url_for('static', filename='/js/main.js') }}"></script>
+	</body>
+</html>

@@ -85,6 +85,7 @@
 								<ul class="actions">
 									<li><a href="{{ url_for('show_expenses', month=month-1, year=year) }}" class="button">Previous Month</a></li>
 									<li><a href="{{ url_for('show_expenses', month=month+1, year=year) }}" class="button">Next Month</a></li>
+									<li><a href="{{ url_for('analyze_expenses', month=month, year=year) }}" class="button">Analyze Month</a></li>
 								</ul>
 							</section>
 					</div>
