@@ -28,6 +28,24 @@
 								<h3>Categorized Expenses for {{ month }}-{{ year }}</h3>
 								<div class="table-wrapper">
 									<table class="alt">
+										<tbody>
+											<tr>
+												<td>Total Expense for the Month</td>
+												<td>{{ expensetotal|round(2) }}</td>
+											</tr>
+											<tr>
+												<td>Total Expense without Home & Family</td>
+												<td>{{ expensetotalwofamhome|round(2) }}</td>
+											</tr>
+											<tr>
+												<td>Total Expense for Grocery & Food</td>
+												<td>{{ expensetotalfood|round(2) }}</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div class="table-wrapper">
+									<table class="alt">
 										<thead>
 											<tr>
 												<th>Category</th>

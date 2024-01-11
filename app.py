@@ -33,7 +33,10 @@ def get_month_analysis(month, year):
         else:
             cat_totals[i["category"]] += float(i["amount"])
     sorted_eight = sorted(expenses, key=lambda x:x["amount"], reverse=True)[:8]
-    return cat_totals, sorted_eight
+    expensetotalwofamhome = sum([i["amount"] for i in expenses if not i["category"] in ["family", "home"]])
+    expensetotalfood = sum([i["amount"] for i in expenses if i["category"] in ["food", "grocery"]])
+    expensetotal = sum([i["amount"] for i in expenses])
+    return cat_totals, sorted_eight, expensetotal, expensetotalfood, expensetotalwofamhome
 
 def get_trend_analysis(month, year):
     # get category totals average for last 6 months
@@ -65,14 +68,17 @@ def show_expenses():
     if not month or not year:
         month, year = get_current_month_year()
     expenses = load_expenses(month, year)
-    return render_template("showcase.html", expenses=expenses, month=month, year=year)
+    expensetotalwofamhome = sum([i["amount"] for i in expenses if not i["category"] in ["family", "home"]])
+    expensetotalfood = sum([i["amount"] for i in expenses if i["category"] in ["food", "grocery"]])
+    expensetotal = sum([i["amount"] for i in expenses])
+    return render_template("showcase.html", expenses=expenses, month=month, year=year, expensetotalwofamhome=expensetotalwofamhome, expensetotalfood=expensetotalfood, expensetotal=expensetotal)
 
 @app.route("/analysis")
 def analyze_expenses():
     month = int(request.args.get("month", 0))
     year = int(request.args.get("year", 0))
-    cat_totals, sorted_eight = get_month_analysis(month, year)
-    return render_template("analysis.html", cat_totals=cat_totals, sorted_eight=sorted_eight, month=month, year=year)
+    cat_totals, sorted_eight, expensetotal, expensetotalfood, expensetotalwofamhome = get_month_analysis(month, year)
+    return render_template("analysis.html", cat_totals=cat_totals, sorted_eight=sorted_eight, month=month, year=year, expensetotalwofamhome=expensetotalwofamhome, expensetotalfood=expensetotalfood, expensetotal=expensetotal)
 
 if __name__ == "__main__":
     app.run(debug=True)
